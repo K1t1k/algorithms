@@ -14,6 +14,7 @@ class NeuralNetMLP(object):
         self.minibatch_size = minibatch_size
         self.random = np.random.RandomState(seed)
 
+    @staticmethod
     def _onehot(self, y, n_classes):
         onehot = np.zeros((n_classes, y.shape[0]))
         for idx, val in enumerate(y.astype(int)):
@@ -22,7 +23,7 @@ class NeuralNetMLP(object):
 
 
     def sigmoid(self, z):
-        return 1. / (1. + np.exp(-np.clip(z, -250, 250)))
+            return 1. / (1. + np.exp(-np.clip(z, -250, 250)))
 
     def _forward(self, X):
         z_h = np.dot(X, self.w_h) + self.b_h
@@ -51,7 +52,6 @@ class NeuralNetMLP(object):
         n_output = np.unique(y_train).shape[0]  # number of class labels
         n_features = X_train.shape[1]
 
-
         self.b_h = np.zeros(self.n_hidden)
         self.w_h = self.random.normal(loc=0.0, scale=0.1,
                                       size=(n_features, self.n_hidden))
@@ -72,8 +72,8 @@ class NeuralNetMLP(object):
             if self.shuffle:
                 self.random.shuffle(indices)
 
-            for start_idx in range(0, indices.shape[0] - self.minibatch_size +
-                                      1, self.minibatch_size):
+            for start_idx in range(0, indices.shape[0] - self.minibatch_size + 1,
+                                   self.minibatch_size):
                 batch_idx = indices[start_idx:start_idx + self.minibatch_size]
 
                 z_h, a_h, z_out, a_out = self._forward(X_train[batch_idx])

@@ -2,7 +2,7 @@ import numpy as np
 
 
 class LinearRegression():
-    def __init__(self, learning_rate, max_iter, random_state=None):
+    def __init__(self, learning_rate: float, max_iter: int, random_state=None):
         self.learning_rate = learning_rate
         self.max_iter = max_iter
         self.w = None
@@ -29,6 +29,29 @@ class LinearRegression():
 
     def predict(self, X):
         return X.dot(self.w)
+
+    @property
+    def intercept_(self):
+        return self.w[0]
+
+    @property
+    def coef_(self):
+        return self.w[1:]
+
+
+class LogisticRegression():
+    def __init__(self, learning_rate, max_iter, random_state):
+        self.learning_rate = learning_rate
+        self.max_iter = max_iter
+        self.w = None
+
+    def fit(self, X, y):
+        self.w = np.random.normal(loc=0.0, scale=1.0, size=self.X.shape[1])
+        for _ in range(self.max_iter):
+            pass
+
+    def predict(self, X):
+        pass
 
     @property
     def intercept_(self):
